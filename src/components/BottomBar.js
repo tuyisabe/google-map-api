@@ -8,7 +8,6 @@ import NotificationsNone from '@mui/icons-material/NotificationsNone';
 
 export default function BottomBar() {
 
-
   return (
     <Box sx={{ width: '100%'}} >
       <BottomNavigation

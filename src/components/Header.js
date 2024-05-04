@@ -24,7 +24,7 @@ export default function Header() {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>
-          <Button color="inherit">Startup</Button>
+          <Button component="div" sx={{color:'#000'}}>Startup</Button>
         </Toolbar>
       </AppBar>
     </Box>
