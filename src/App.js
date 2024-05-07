@@ -13,7 +13,6 @@ const waypoints = [
     { lat: -1.9487480402200394, lng: 30.126596781356923 ,label:'Kimironko bus park'},  // Stop E
     { lat: -1.9365670876910166, lng: 30.13020167024439 ,label:'kimironko'}  // Kimironko
 ];
-
 function App() {
     return (
         <div className="App">
