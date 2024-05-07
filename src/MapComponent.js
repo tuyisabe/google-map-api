@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, Marker } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
 const MapComponent = ({ waypoints }) => {
     const mapStyles = {
@@ -7,15 +7,20 @@ const MapComponent = ({ waypoints }) => {
         width: '100%'
     };
     const [directions, setDirections] = useState(null);
-    const markers = waypoints.map((waypoint, index) => (
-        <Marker key={`marker-${index}`} position={waypoint} icon=''/>
-    ));
 
     const directionsOptions = {
         origin: waypoints[0],
         destination: waypoints[waypoints.length - 1],
         waypoints: waypoints.slice(1, -1).map(waypoint => ({ location: waypoint })),
         travelMode: 'DRIVING',
+    };
+
+    const directionsRendererOptions = {
+        polylineOptions: {
+            strokeColor: '#035b99', // Specify your desired color here (e.g., red)
+            strokeOpacity: 1,
+            strokeWeight: 4,
+        },
     };
 
     const handleDirections = (result, status) => {
@@ -25,15 +30,18 @@ const MapComponent = ({ waypoints }) => {
             console.error('Error fetching directions:', status);
         }
     };
+
     return (
-        <div style={{height:'71vh'}}>
-        <LoadScript googleMapsApiKey="AIzaSyBG6bUNBCd9TmMpvvYu7Ymj5iHQzo9Pkdk">
-            <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={waypoints[0]} options={{streetViewControl:false,mapTypeControl:false,zoomControl:false,fullscreenControl:false}}>
+        <div style={{ height: '71vh' }}>
+            <GoogleMap
+                mapContainerStyle={mapStyles}
+                zoom={13}
+                center={waypoints[0]}
+                options={{ streetViewControl: false, mapTypeControl: false, fullscreenControl: false }}
+            >
                 <DirectionsService options={directionsOptions} callback={handleDirections} />
-                {directions && <DirectionsRenderer directions={directions} />}
-                {markers}
+                {directions && <DirectionsRenderer directions={directions} options={directionsRendererOptions} />}
             </GoogleMap>
-        </LoadScript>
         </div>
     );
 };

@@ -27,7 +27,7 @@ const LocationTracker = ({ waypoints }) => {
         if (!currentLocation) return;
 
         // Calculate distance between current location and next stop
-        const nextStop = waypoints.find((waypoint, index) => index > 0 && index < waypoints.length - 1);
+        const nextStop = waypoints.find((waypoint, index) => index > 5 && index < waypoints.length );
         const distance = window.google.maps.geometry.spherical.computeDistanceBetween(
             new window.google.maps.LatLng(currentLocation.lat, currentLocation.lng),
             new window.google.maps.LatLng(nextStop.lat, nextStop.lng),
@@ -45,7 +45,7 @@ const LocationTracker = ({ waypoints }) => {
 
     return (
         <div style={{display:'flex',flexDirection:'column', justifyContent:'center',alignItems:'center',gap:-10}}>
-            <div ><p>Nyabugogo - kimironko</p>
+            <div ><p style={{fontWeight:'bold'}}>Nyabugogo - kimironko</p>
                <p style={{marginTop:'-18px'}}> Next Stop: {nextStopData} </p>
            {eta !== null && <p style={{marginTop:'-18px'}}> Distance: {Math.round(dist/1000)} km &nbsp;&nbsp;  Time: {eta} minutes</p>}</div> 
         </div>
